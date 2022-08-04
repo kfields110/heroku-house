@@ -1,6 +1,7 @@
 import flask
 from flask import Flask, render_template, request
 import pickle
+import numpy as np
 import house_price
 
 # Running the flask app
@@ -11,6 +12,7 @@ model = pickle.load(open('model.pkl', 'rb'))
 
 @app.route('/', methods=['GET', "POST"])
 def home():
+    prediction = None
     if request.method == "POST":
         bedrooms = int(request.form['num_bedrooms'])
         bathrooms = int(request.form['num_bathrooms'])
